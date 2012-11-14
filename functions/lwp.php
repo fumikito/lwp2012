@@ -70,7 +70,7 @@ function _lwper_custom_post_types(){
 		'supports' => array('title', 'editor', 'author', 'slug', 'thumbnail'),
 		'has_archive' => true,
 		'capability_type' => 'post',
-		'rewrite' => array('slug' => 'event')
+		'rewrite' => array('slug' => 'news')
 	));
 }
 add_action('init', '_lwper_custom_post_types');
@@ -100,3 +100,14 @@ function _lwper_get_post_type_labels($name){
 	}
 	return $labels;
 }
+
+/**
+ * Google Mapを入れられるようにする
+ * @param array $initArray
+ * @return string
+ */
+function _lwper_tinymce($initArray) {
+	$initArray[ 'extended_valid_elements' ] .= "iframe[id|class|title|style|align|frameborder|height|longdesc|marginheight|marginwidth|name|scrolling|src|width]";
+	return $initArray;
+}
+add_filter('tiny_mce_before_init', '_lwper_tinymce', 10000);
