@@ -47,3 +47,56 @@ function _lwper_form_header($title){
 	return !empty($img) ? sprintf('<img alt="%s" src="%s" style="width: 100%%; height: auto;" />', esc_attr($title), $img) : $title;
 }
 add_filter('lwp_form_title', '_lwper_form_header');
+
+/**
+ * カスタム投稿タイプを追加する
+ */
+function _lwper_custom_post_types(){
+	register_post_type('event', array(
+		'label' => 'イベント',
+		'labels' => _lwper_get_post_type_labels('イベント'),
+		'description' => 'イベントなどを開催することもできます。',
+		'public' => true,
+		'supports' => array('title', 'editor', 'author', 'slug', 'thumbnail'),
+		'has_archive' => true,
+		'capability_type' => 'post',
+		'rewrite' => array('slug' => 'event')
+	));
+	register_post_type('news', array(
+		'label' => '有料ニュース',
+		'labels' => _lwper_get_post_type_labels('有料ニュース'),
+		'description' => '有料の定期購読を作ることもできます',
+		'public' => true,
+		'supports' => array('title', 'editor', 'author', 'slug', 'thumbnail'),
+		'has_archive' => true,
+		'capability_type' => 'post',
+		'rewrite' => array('slug' => 'event')
+	));
+}
+add_action('init', '_lwper_custom_post_types');
+
+/**
+ * カスタム投稿タイプ要のラベルを返す
+ * @param string $name
+ * @return string
+ */
+function _lwper_get_post_type_labels($name){
+	$label_array = array(
+		'name' => '%s',
+		'add_new' => '新規追加',
+		'add_new_item' => '新規%sを追加',
+		'edit_item' => '%sを編集',
+		'new_item' => '新規%s',
+		'view_item' => '%sを表示',
+		'search_items' => '%sを検索',
+		'not_found' => '%sは見つかりませんでした',
+		'not_found_in_trash' => 'ゴミ箱に%sは見つかりませんでした'
+	);
+	$labels = array();
+	foreach($label_array as $key => $val){
+		$labels[$key] = (false !== strpos($val, '%s'))
+				? sprintf($val, $name)
+				: $val;
+	}
+	return $labels;
+}
