@@ -351,9 +351,9 @@ class LWPer_Theme_SDK{
 							break;
 						}
 						//テーマディレクトリを消す
-						
+						$wp_filesystem->delete($theme_dir, true);
 						//テーマディレクトリを移動する
-						
+						$wp_filesystem->move($new_dir, $theme_dir, true);
 						//メンテナンスモード解除
 						if(!$wp_filesystem->delete($maintenance_file)){
 							$json['message'] = sprintf($this->_('メンテナンスモードを解除できませんでした。<code>%s</code>を削除してください。'), $maintenance_file);
