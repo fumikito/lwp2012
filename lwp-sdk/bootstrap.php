@@ -357,8 +357,10 @@ class LWPer_Theme_SDK{
 							$json['message'] = sprintf($this->_('メンテナンスモードを解除できませんでした。<code>%s</code>を削除してください。'), $maintenance_file);
 							break;
 						}
+						//テーマのキャッシュを削除
+						wp_get_theme()->cache_delete();
 						$json['success'] = true;
-						$json['message'] = $this->_('テーマのアップデートが完了しました');
+						$json['message'] = $this->_('テーマのアップデートが完了しました。ページを再読み込みします。');
 						break;
 				}
 			}

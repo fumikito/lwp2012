@@ -55,6 +55,9 @@ jQuery(document).ready(function($){
 							$.post(endPoint, vars, updator);
 						}else{
 							makeSuccess();
+							setTimeout(function(){
+								window.location.reload();
+							}, 3000);
 						}
 					}else{
 						errorOccured(result.message);
