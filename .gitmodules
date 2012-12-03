@@ -1,0 +1,3 @@
+[submodule "lwp-sdk"]
+	path = lwp-sdk
+	url = git@github.com:fumikito/lwp-sdk.git
