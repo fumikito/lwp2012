@@ -217,12 +217,10 @@ class LWPer_Theme_SDK{
 	 */
 	private function get_file($file_id){
 		$client = $this->get_client();
-		$client->query('lwp.file.getFile', $this->get_provider_token(), $file_id);
-		$response = $client->getResponse();
-		if(empty($response)){
-			return false;
+		if($client->query('lwp.file.getFile', $this->get_provider_token(), $file_id)){
+			return $client->getResponse();
 		}else{
-			return $response;
+			return false;
 		}
 	}
 	
