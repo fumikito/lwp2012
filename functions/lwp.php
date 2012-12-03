@@ -14,15 +14,23 @@ PayPalの場合は以下の決済情報を使ってください。<br />
 EOS;
 			break;
 		case 'payment':
-			switch($_REQUEST['lwp-method']){
-				case 'gmo-cc':
-					$message = <<<EOS
+			if(isset($_REQUEST['lwp-method'])){
+				switch($_REQUEST['lwp-method']){
+					case 'gmo-cc':
+						$message = <<<EOS
 有効なカードとして認識されるのは次の情報です。
 カード番号：<strong>4111111111111111</strong>
 有効期限：<strong>2013年1月</strong>
 セキュリティコード：<strong>3~4桁の任意の番号</strong>
 EOS;
-					break;
+						break;
+					case 'sb-cc':
+						$message = <<<EOS
+カードのバリデーション（カード番号、有効期限、セキュリティコード）が通れば、決済は完了します。
+ただし、実際に送信しているのはサンドボックス専用のカードです。
+EOS;
+						break;
+				}
 			}
 			break;
 		case 'payment-info':

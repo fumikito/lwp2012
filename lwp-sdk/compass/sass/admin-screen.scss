@@ -1,0 +1,52 @@
+@charset 'utf-8';
+
+@import "compass/css3/border-radius";
+
+p.invalid,
+p.valid{
+	margin: 0.25em 0;
+	padding: 0.25em 0.5em;
+	@include border-radius(3px);
+}
+p.invalid{
+	background-color: #ffebe8;
+	color: #f00;
+}
+p.valid{
+	color: #059119;
+	background-color: #c6f4cd;
+}
+
+#updater-status{
+	display: none;
+	ol{
+		li{
+			line-height: 16px;
+		}
+		i{
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			vertical-align: top;
+			margin-right: 0.5em;
+		}
+		.success{
+			color: #888;
+			i{
+				background: url('../../jquery-smoothness/images/ui-icons_888888_256x240.png') -64px -144px no-repeat;
+			}
+			strong{
+				color: #059119;
+			}
+		}
+		.loading i{
+			background: url('../../img/ajax-loader.gif') left top no-repeat;
+		}
+		.error{
+			color: #f00;
+			i{
+				background: url('../../jquery-smoothness/images/ui-icons_cd0a0a_256x240.png') -96px -128px no-repeat;
+			}
+		}
+	}
+}
